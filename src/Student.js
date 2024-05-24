@@ -16,14 +16,14 @@ export default class Student extends Component {
         return res.json();
       })
       .then((data) => {
-        console.log("this", this);
 
         this.setState({ data: data });
       });
   }
 
+
+
   render() {
-    console.log(this.state);
     return (
       <div className="overflow-x-auto">
         <table className="min-w-full bg-white border border-gray-300 shadow-sm rounded-lg">
