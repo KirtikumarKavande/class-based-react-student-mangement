@@ -7,7 +7,22 @@ export default class Student extends Component {
 
     this.state = {
       data: [],
+      allData: [],
     };
+  }
+
+  componentDidUpdate(preProps, preState) {
+    const updatedStudent = this.state.allData.filter((item) =>(
+      item.username.toLowerCase().includes(this.props.typedKeyword.toLowerCase())||
+      item.email.toLowerCase().includes(this.props.typedKeyword.toLowerCase()) ||
+      item.name.toLowerCase().includes(this.props.typedKeyword.toLowerCase())
+    ))
+
+    if (preProps.typedKeyword !== this.props.typedKeyword) {
+      this.setState({ data: updatedStudent });
+    }
+
+    console.log(updatedStudent);
   }
 
   componentDidMount() {
@@ -16,12 +31,10 @@ export default class Student extends Component {
         return res.json();
       })
       .then((data) => {
-
         this.setState({ data: data });
+        this.setState({ allData: data });
       });
   }
-
-
 
   render() {
     return (

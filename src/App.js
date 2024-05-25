@@ -2,10 +2,19 @@ import React from "react";
 import Input from "./Input";
 import Student from "./Student";
 class App extends React.Component {
+  constructor(props) {
+    super(props);
 
+    this.state={
+      typedKeyWord:""
+    }
+    this.dataChangeFunc = this.dataChangeFunc.bind(this);
+
+  }
 
   dataChangeFunc(data) {
-console.log("parent comm data",data)
+    this.setState({typedKeyWord:data})
+    console.log("parent comm data", data);
   }
   render() {
     return (
@@ -14,7 +23,7 @@ console.log("parent comm data",data)
           <Input dataChangeFunc={this.dataChangeFunc} />
         </div>
 
-        <Student />
+        <Student typedKeyword={this.state.typedKeyWord} />
       </div>
     );
   }
